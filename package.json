@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "basiclightbox": "^5.0.4"
+    "basiclightbox": "^5.0.4",
+    "simplelightbox": "^2.13.0"
   },
   "name": "goit-js-hw-07",
   "version": "1.0.0",
