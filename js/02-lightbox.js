@@ -33,8 +33,8 @@ for (let i = 0; i < galleryItems.length; i++) {
 }
 ulElement.prepend(...galleryArray);
 
-ulElement.addEventListener("click", (event) => {
-  event.preventDefault();
+// ulElement.addEventListener("click", (event) => {
+  // event.preventDefault();
     let gallery = new SimpleLightbox(".gallery a", options);
     gallery.on();
-});
+// });
