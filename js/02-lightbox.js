@@ -15,7 +15,7 @@ function createLiElem(image) {
   a.setAttribute("href", bigImg);
   img.setAttribute("src", smallImg);
   img.setAttribute("alt", descriptionImg);
-  img.setAttribute("title", descriptionImg);
+  // img.setAttribute("title", descriptionImg);
 
   a.append(img);
   li.append(a);
@@ -25,6 +25,7 @@ function createLiElem(image) {
 const galleryArray = [];
 const ulElement = document.querySelector(".gallery");
 const options = {
+  captionsData: "alt",
   captionDelay: 250,
 };
 
