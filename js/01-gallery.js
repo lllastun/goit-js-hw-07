@@ -43,42 +43,89 @@ function createLiElem(image) {
 </li>`;
 }
 
+function escKeyPress(event) {
+    if (event.code == "Escape") {
+      instance.close();
+    }
+}
+
 const galleryArray = [];
 const ulElement = document.querySelector(".gallery");
+
 
 for (let i = 0; i < galleryItems.length; i++) {
   galleryArray.push(createLiElem(galleryItems[i]));
 }
 
 const insertedString = galleryArray.join("");
-// ulElement.prepend(...galleryArray);
-ulElement.innerHTML = insertedString;
+ulElement.insertAdjacentHTML("afterbegin", insertedString);
+
+let instance;
 
 ulElement.addEventListener("click", (event) => {
   event.preventDefault();
   const bigImg = event.target.dataset.source;
 
-  // if (event.currentTarget !== event.target) {
-  if (event.target.classList.contains("gallery__image")) {
-    const instance = basicLightbox.create(`
+  instance = basicLightbox.create(`
     <img src="${bigImg}" width="800" height="600">
-    `);
-    // {
-    //   onShow: (instance) => {
-    //     document.addEventListener('keydown', escKeyPress)
-    //   },
-    //   onClose: (instance) => {
-    //     document.removeEventListener('keydown', escKeyPress)
-    //   },
-    // }
-    instance.show();
+  `, {
+    onShow: (instance) => {
+      const visible = instance.visible();
+      if (!visible) {
+        document.addEventListener('keydown', escKeyPress);     
+      }},
+    onClose: () => {
+      document.removeEventListener('keydown', escKeyPress);
+    },
+  });
 
-    function escKeyPress(event) {
-      if (event.code == "Escape") {
-        instance.close();
-        document.removeEventListener("keydown", escKeyPress);
-      }
-    }
-    document.addEventListener("keydown", escKeyPress);
-  }
+  instance.show();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function escKeyPress(event) {
+//   if (event.code == "Escape") {
+//     instance.close();
+//     // document.removeEventListener("keydown", escKeyPress);
+//   }
+// }
+// const galleryArray = [];
+// const ulElement = document.querySelector(".gallery");
+
+// for (let i = 0; i < galleryItems.length; i++) {
+//   galleryArray.push(createLiElem(galleryItems[i]));
+// }
+
+// const insertedString = galleryArray.join("");
+// console.log(typeof insertedString);
+// ulElement.innerHTML = insertedString;
+
+// ulElement.addEventListener("click", (event) => {
+//   event.preventDefault();
+//   const bigImg = event.target.dataset.source;
+
+//   const instance = basicLightbox.create(`
+//   <img src="${bigImg}" width="800" height="600">
+//   `,
+//   {
+//     onShow: (instance) => {
+//       document.addEventListener('keydown', escKeyPress)
+//     },
+//     onClose: (instance) => {
+//       document.removeEventListener('keydown', escKeyPress)
+//     },
+//   });
+//   instance.show();
+// });
